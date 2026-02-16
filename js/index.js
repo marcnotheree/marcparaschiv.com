@@ -376,38 +376,21 @@ $(function pagetransition() {
 // SORTING OF IMAGES
 
 $(function () {
-  var sortingbuttons = document.querySelectorAll(".image-sort-button"); //GET ALL IMAGE SORTING BUTTON THEY HAVE A CLASS OF 'IMAGE-SORT-BUTTON'
-  var images = [...document.querySelectorAll(".gallery-img")]; //GET ALL IMAGES WITH CLASS 'GALLERY-IMG'
-
-  //SORT IMAGES
+  var sortingbuttons = document.querySelectorAll(".image-sort-button");
   sortingbuttons.forEach((button) =>
     button.addEventListener("click", function () {
-      var sortvalue = button.dataset.sort; //GET VALUE OF THE 'DATA-SORT' FROM BUTTON WHICH HAS BEEN CLICKED
-
-      images.forEach((image) => (image.style.display = "none")); //GET ALL THE IMAGES AND SET THEIR DISPLAY TO NONE
-
-      var imagestoshown = document.querySelectorAll(`[alt='${sortvalue}']`); //GET ALL THE IMAGES WHICH WE NEED TO SHOW
-
-      imagestoshown.forEach((show) => (show.style.display = "block")); //SET IMAGES TO BLOCK
-
-      if (sortvalue == "all") {
-        //IF BUTTON "ALL" IS CLICKED SET ALL IMAGES TO BLOCK
+      var sortvalue = button.dataset.sort;
+      var images = document.querySelectorAll(".gallery-img");
+      images.forEach((image) => (image.style.display = "none"));
+      if (sortvalue === "all") {
         images.forEach((image) => (image.style.display = "block"));
+      } else {
+        var imagestoshown = document.querySelectorAll(`[alt='${sortvalue}']`);
+        imagestoshown.forEach((show) => (show.style.display = "block"));
       }
-      //SORT IMAGES
-
-      //SET NEW MASONRY
-      new Masonry(".gallery-grid", {
-        itemSelector: ".column",
-        isAnimated: true,
-      });
-      //SET NEW MASONRY
-
-      //CHANGE BUTTON STYLE
-      sortingbuttons.forEach((buttons) => buttons.classList.remove("active")); //REMOVE CLASSLIST OF ACTIVE FROM CURRENT BUTTON
-      button.classList.add("active"); // ADD CLASS LIST OF ACTIVE TO THE BUTTON WHICH HAS BEEN CLICKED
-
-      //CHANGE BUTTON STYLE
+      new Masonry(".gallery-grid", { itemSelector: ".column", isAnimated: true });
+      sortingbuttons.forEach((b) => b.classList.remove("active"));
+      button.classList.add("active");
     }),
   );
 });

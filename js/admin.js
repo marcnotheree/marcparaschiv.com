@@ -1,15 +1,15 @@
 function qs(id) { return document.getElementById(id); }
 function qsa(sel, root=document) { return Array.from(root.querySelectorAll(sel)); }
 
-function getAuth() { return sessionStorage.getItem("adminAuth") || ""; }
+function getAuth() { return localStorage.getItem("adminAuth") || ""; }
 function setAuth(user, pass) {
   const token = btoa(`${user}:${pass}`);
-  sessionStorage.setItem("adminAuth", token);
-  sessionStorage.setItem("adminUser", user);
+  localStorage.setItem("adminAuth", token);
+  localStorage.setItem("adminUser", user);
 }
 function clearAuth() {
-  sessionStorage.removeItem("adminAuth");
-  sessionStorage.removeItem("adminUser");
+  localStorage.removeItem("adminAuth");
+  localStorage.removeItem("adminUser");
 }
 function authHeader() {
   const t = getAuth();
@@ -24,7 +24,7 @@ async function apiFetch(url, options={}) {
 function showApp() {
   qs("login").style.display = "none";
   qs("app").style.display = "block";
-  qs("who").textContent = sessionStorage.getItem("adminUser") || "";
+  qs("who").textContent = localStorage.getItem("adminUser") || "";
 }
 function showLogin() {
   qs("login").style.display = "block";

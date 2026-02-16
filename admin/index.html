@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Admin</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; color: #0f172a; background: #f8fafc; }
+    .card { max-width: 720px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }
+    h1 { font-size: 20px; margin: 0 0 16px; }
+    label { display: block; margin: 12px 0 6px; font-weight: 600; }
+    input, select, button { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; }
+    input[type="file"] { padding: 8px; }
+    button { background: #0ea5e9; color: #fff; border: none; cursor: pointer; margin-top: 16px; }
+    button:disabled { background: #94a3b8; cursor: not-allowed; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .status { margin-top: 20px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:#f1f5f9; border:1px dashed #cbd5e1; padding:12px; border-radius:8px; max-height:220px; overflow:auto; }
+    .link { display: inline-block; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Upload Images to Portfolio</h1>
+    <label for="password">Admin Password</label>
+    <input id="password" type="password" placeholder="Enter admin password">
+
+    <div class="row">
+      <div>
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="portfolio">portfolio</option>
+          <option value="portrait">portrait</option>
+          <option value="nature">nature</option>
+          <option value="event">event</option>
+          <option value="advertising">advertising</option>
+          <option value="architecture">architecture</option>
+          <option value="places">places</option>
+        </select>
+      </div>
+      <div>
+        <label for="files">Images</label>
+        <input id="files" type="file" multiple accept="image/*">
+      </div>
+    </div>
+    <button id="upload">Upload</button>
+    <div class="status" id="status"></div>
+  </div>
+  <script src="../js/admin.js" defer></script>
+</body>
+</html>

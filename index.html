@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Marc Paraschiv -  Photographer </title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+        * {
+            touch-action: pan-y pinch-zoom;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gallery-img {
+            /* allow vertical panning (page scroll) while still permitting pinch-zoom on images */
+            touch-action: pan-y pinch-zoom;
+            -webkit-touch-callout: none;
+        }
+        .popup-modal {
+            touch-action: none;
+        }
+    </style>
+    <!-- Meta Description -->
+    <meta name="description" content="Marc Paraschiv is a Bucharest-based photographer specializing in portraits, nature, events, and products. Book now to capture your story with creativity and heart.">
+    <!-- Keywords -->
+    <meta name="keywords" content="Marc Paraschiv, photographer, photography, portrait photography, nature photography, event photography, product photography, professional photographer, Bucharest photographer, Romania photography, creative photography, artistic photography, wedding photography, commercial photography, lifestyle photography, photography services, professional photo sessions, photography in Bucharest, Romanian photographer, photography portfolio, photography studio, photography for brands, photography for events, photography for advertising, photography for social media, marc paraschiv, photography, photographer, Bucharest, Romania, portrait, portraits, nature, events, event, product, creative, professional, photo shoot, photo session, personal, timeless, modern, natural light, candid, lifestyle, headshots, booking, photos, visuals, camera, studio, on-location, digital, editing, retouching, gallery, snapshots">
+    <!-- Author -->
+    <meta name="author" content="Marc Paraschiv">
+    <!-- Open Graph Meta Tags (for social media sharing) -->
+    <meta property="og:title" content="Marc Paraschiv - Photographer">
+    <meta property="og:description" content="Specializing in portrait, nature, event, and product photography, Marc Paraschiv captures timeless moments with a creative and personal touch.">
+    <meta property="og:image" content="images/RENDERS/Logo.svg">
+    <!-- Replace with your logo or a featured image -->
+    <meta property="og:url" content="https://www.marcparaschiv.com">
+    <!-- Replace with your website URL -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Marc Paraschiv Photography">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Marc Paraschiv - Professional Photographer in Bucharest">
+    <meta name="twitter:description" content="Specializing in portrait, nature, event, and product photography, Marc Paraschiv captures timeless moments with a creative and personal touch.">
+    <meta name="twitter:image" content="images/RENDERS/Logo.svg">
+    <!-- Replace with your logo or a featured image -->
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.marcparaschiv.com">
+    <!-- Replace with your website URL -->
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg" type="image/svg">
+    <!-- For Apple devices -->
+    <!-- Robots Meta Tag -->
+    <meta name="robots" content="index, follow">
+    <!-- Structured Data (JSON-LD for Local Business) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Photographer",
+            "name": "Marc Paraschiv",
+            "url": "https://www.marcparaschiv.com",
+            "logo": "https://www.marcparaschiv.com/images/RENDERS/logo.svg",
+            "image": "https://www.marcparaschiv.com/images/RENDERS/portrait-1.jpg",
+            "description": "Marc Paraschiv is a professional photographer based in Bucharest, Romania. Specializing in portraits, nature, events, and product photography, Marc captures timeless moments with a creative and personal touch.",
+    
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+40 771 281 442",
+                "email": "marc@marcparaschiv.com"
+            },
+            "sameAs": ["https://www.instagram.com/marcnotheree/", "https://www.tiktok.com/@marcnotheree", "https://www.linkedin.com/in/marc-paraschiv-155604213/"]
+        }
+    </script>
+     <!-- Cross-Browser Compatibility -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Preload Fonts -->
+    <link rel="preload" href="css/fonts/orelo_standard_medium-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="css/fonts/Crustaceans-SignatureDEMO-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="css/fonts/camel.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <!-- Preload Key Images -->
+    <link rel="preload" href="images/RENDERS/ghita1-55.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="images/RENDERS/untitled-4.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="images/RENDERS/apr25-25.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="images/RENDERS/untitled-1-2.jpg" as="image" fetchpriority="high">
+    <!-- CSS LINKS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" integrity="sha256-DBYdrj7BxKM3slMeqBVWX2otx7x4eqoHRJCsSDJ0Nxw=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <script src="js/masonry.min.js" defer></script>
+    <script src="js/jquery.lettering.js" defer></script>
+    <script src="js/circletype.min.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            emailjs.init({
+                publicKey: "xOLb9eiFfAyGzqa_X",
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+    <!-- ALL CONTENTS -->
+    <main id="all">
+        <!--------------- LOADER--------------->
+        <div id="loader">
+            <!-- LOADER TEXT -->
+            <div class="loader-text-stroke"> Marc&nbsp;Paraschiv <div class="loader-text"> Marc&nbsp;Paraschiv </div>
+            </div>
+            <!-- LOADER TEXT -->
+        </div>
+        <!--------------- LOADER --------------->
+        <!-- BREAKER (SCREEN THAT DISPLAYS ON LINKS CLICK) -->
+        <div id="breaker">
+        </div>
+        <!-- BREAKER (SCREEN THAT DISPLAYS ON LINKS CLICK) -->
+        <!--------------- CURSOR --------------->
+        <div class="cursor"></div>
+        <div class="cursor-two"></div>
+        <!-- -------------CURSOR --------------->
+        <!-- NAVIGATION CONTENT -->
+        <div id="navigation">
+            <!-- LOGO -->
+            <div class="logo hover navigation-opacity">
+                <a href="#home" class="page-link"> Marc Paraschiv </a>
+            </div>
+            <!-- LOGO -->
+            <!-- NAVIGTAION CLOSE -->
+            <div class="navigation-close hover navigation-opacity">
+                <div class="navigation-close-line"></div>
+                <div class="navigation-close-line"></div>
+            </div>
+            <!-- NAVIGTAION CLOSE -->
+            <!-- NAVIGATION LINKS -->
+            <div class="navigation-links">
+                <ul>
+                    <li class="navigation-opacity"><a href="#home" class="page-link hover">Home</a></li>
+                    <li class="navigation-opacity"><a href="#about" class="page-link hover">About</a></li>
+                    <li class="navigation-opacity"><a href="#gallery" class="page-link hover">Gallery</a></li>
+                    <li class="navigation-opacity"><a href="#contact" class="page-link hover">Contact</a></li>
+                </ul>
+            </div>
+            <!-- NAVIGATION LINKS -->
+            <!-- SOCIAL MEDIA LINKS -->
+            <div class="social-media-links">
+                <ul>
+                    <li class="navigation-opacity"><a href="https://www.instagram.com/marcnotheree/" class="hover">In/</a></li>
+                    <li class="navigation-opacity"><a href="https://www.tiktok.com/@marcnotheree" class="hover">Tt/</a></li>
+                    <li class="navigation-opacity"><a href="https://www.linkedin.com/in/marc-paraschiv-155604213/" class="hover">Ln</a></li>
+                </ul>
+            </div>
+            <!-- SOCIAL MEDIA LINKS -->
+        </div>
+        <!-- NAVIGATION CONTENT -->
+        <!--------------------- HOME PAGE --------------------->
+        <div id="home">
+            <!-- HOME CONTENTS -->
+            <div id="home-contents">
+                <!-- NAVIGATION BAR -->
+                <div class="navigation-bar">
+                    <!-- LOGO -->
+                    <div class="logo">
+                        <a href="#home" class="page-link hover"> Marc Paraschiv </a>
+                    </div>
+                    <!-- LOGO -->
+                    <!-- MENUBAR -->
+                    <div class="menu-bar hover">
+                        <div class="menu-bar-text">
+                            <a href="#">Menu</a>
+                        </div>
+                        <div class="menu-bar-line-container">
+                            <span class="menu-bar-line"></span>
+                            <span class="menu-bar-line"></span>
+                        </div>
+                    </div>
+                    <!-- MENUBAR -->
+                </div>
+                <!-- NAVIGATION BAR -->
+                <!-- SLIDER -->
+                <div class="swiper-container parallax-slider">
+                    <div class="swiper-wrapper">
+                        <!-- IMAGE -->
+                        <div class="swiper-slide">
+                            <div class="img-container">
+                                <a href="#gallery" class="page-link">
+                                    <img src="images/RENDERS/ghita1-55.jpg" alt="portrait-main-image" class="home-images" loading="lazy">
+
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- IMAGE -->
+                        <div class="swiper-slide">
+                            <div class="img-container">
+                                <a href="#gallery" class="page-link ">
+                                    <img src="images/RENDERS/untitled-4.jpg" alt="wedding-main-image" class="home-images" loading="lazy">
+
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- IMAGE -->
+                        <div class="swiper-slide">
+                            <div class="img-container">
+                                <a href="#gallery" class="page-link">
+                                    <img src="images/RENDERS/apr25-25.jpg" alt="advertising-main-image" class="home-images" loading="lazy">
+
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- IMAGE -->
+                        <div class="swiper-slide">
+                            <div class="img-container">
+                                <a href="#gallery" class="page-link">
+                                    <img src="images/RENDERS/untitled-1-2.jpg" alt="nature-main-image" class="home-images" loading="lazy">
+
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- IMAGE -->
+                    </div>
+                    <!-- PAGINATION -->
+                    <div class="swiper-pagination">
+                    </div>
+                    <!-- PAGINATION -->
+                </div>
+                <!-- SLIDER -->
+                <!-- ABOUT LINK -->
+                <div class="about-link hover">
+                    <a href="#about" class="hover page-link"> ABOUT </a>
+                </div>
+                <!-- ABOUT LINK -->
+            </div>
+            <!-- HOME CONTENTS --->
+        </div>
+        <!--------------------- HOME PAGE --------------------->
+        <!-------------------- ABOUT PAGE ------------------->
+        <div id="about">
+            <!-- ABOUT CONTENTS -->
+            <div id="about-contents">
+                <!-- NAVIGATION BAR -->
+                <div class="navigation-bar">
+                    <!-- LOGO -->
+                    <div class="logo">
+                        <a href="#home" class="page-link hover"> Marc Paraschiv </a>
+                    </div>
+                    <!-- LOGO -->
+                    <!-- MENUBAR -->
+                    <div class="menu-bar hover">
+                        <div class="menu-bar-text">
+                            <a href="#">Menu</a>
+                        </div>
+                        <div class="menu-bar-line-container">
+                            <span class="menu-bar-line"></span>
+                            <span class="menu-bar-line"></span>
+                        </div>
+                    </div>
+                    <!-- MENUBAR -->
+                </div>
+                <!-- NAVIGATION BAR -->
+                <!-- ABOUT MAIN CONTENTS -->
+                <div class="about-main-contents">
+                    <!-- ABOUT IMAGE -->
+                    <div class="about-image">
+                        <div class="about-img-container">
+                            <div class="about-image-back"></div>
+                            <img src="images/RENDERS/pm_c80-7.jpg" alt="about image" loading="lazy">
+                            <!--ADD YOUR IMAGE HERE-->
+                        </div>
+                    </div>
+                    <!-- ABOUT IMAGE -->
+                    <!-- ABOUT INFO -->
+                    <div class="about-info">
+                        <div class="heading"> Your story, my focus. </div>
+                        <div class="paragraph"> Hi, I’m Marc Paraschiv — a passionate photographer based in Bucharest, Romania. Photography, for me, is more than just capturing images — it’s about freezing moments that carry emotion, personality, and beauty. Whether I’m out in nature or working one-on-one with someone, I’m always looking for that spark of realness that makes a photo feel alive. </div>
+                        <div class="paragraph"> I specialize in portrait and nature photography, offering personalized photo sessions that bring out the best in every subject. From intimate solo shoots to expressive outdoor scenes, my work is all about storytelling through light, composition, and emotion. I love working with natural environments and genuine expressions, creating images that feel both artistic and grounded. I offer services tailored to your needs — whether you're seeking creative portraits, scenic landscapes, or something in between. I focus on comfort, clarity, and creativity during every shoot, making sure you feel seen and represented.<br>Each project is a collaboration, and I’m always open to new ideas and inspiration. If you’re looking for a photographer who blends technical skill with a personal touch, I’d love to work with you and help turn your vision into something timeless. </div>
+                        <div class="about-call-to-action">
+                        </div>
+                        <!--<div class="cv-button">
+<a href="#" class="hover">Download CV</a>
+</div>-->
+                    </div>
+                    <!-- ABOUT INFO -->
+                </div>
+                <!-- ABOUT MAIN CONTENTS -->
+            </div>
+            <!-- ABOUT CONTENTS -->
+        </div>
+        <!-------------------- ABOUT PAGE ------------------->
+        <!-------------------- GALLERY PAGE ------------------->
+        <div id="gallery">
+            <!-- GALLERY CONTENT -->
+            <div id="gallery-content">
+                <!-- NAVIGATION BAR -->
+                <div class="navigation-bar">
+                    <!-- LOGO -->
+                    <div class="logo">
+                        <a href="#home" class="page-link hover"> Marc Paraschiv </a>
+                    </div>
+                    <!-- LOGO -->
+                    <!-- MENUBAR -->
+                    <div class="menu-bar hover">
+                        <div class="menu-bar-text">
+                            <a href="#">Menu</a>
+                        </div>
+                        <div class="menu-bar-line-container">
+                            <span class="menu-bar-line"></span>
+                            <span class="menu-bar-line"></span>
+                        </div>
+                    </div>
+                    <!-- MENUBAR -->
+                </div>
+                <!-- NAVIGATION BAR -->
+                <!-- GALLERY HEADER CONTENTS -->
+                <div class="gallery-header-content">
+                    <!-- IMAGE SELECTION BUTTONS -->
+                    <div class="image-selector">
+                        <a href="#" class="image-sort-button hover active" data-sort="all">All</a>
+                        <a href="#" class="image-sort-button hover" data-sort="portrait">Portrait</a>
+                        <a href="#" class="image-sort-button hover" data-sort="event">Events</a>
+                        <a href="#" class="image-sort-button hover" data-sort="advertising">Advertising</a>
+                        <a href="#" class="image-sort-button hover" data-sort="nature">Nature</a>
+                        <a href="#" class="image-sort-button hover" data-sort="architecture">Architecture</a>
+                        <a href="#" class="image-sort-button hover" data-sort="places">Places</a>
+                    </div>
+                    <!-- IMAGE SELECTION BUTTONS -->
+                </div>
+                <!-- GALLERY HEADER CONTENTS -->
+                <!-- IMAGES CONTAINER -->
+                <div class="gallery-images-container">
+                    <!-- GRID CONTAINER -->
+                    <div class="gallery-grid">
+
+                        <div class="column">
+                            <img src="images/RENDERS/untitled-7.jpg" data-highres="images/highres/untitled-7.jpg" alt="portrait" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/IMG_9251.jpg" data-highres="images/highres/IMG_9251.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/apr25-25.jpg" data-highres="images/highres/apr25-25.jpg" alt="architecture" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/PSYC-41.jpg" data-highres="images/highres/PSYC-41.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/IMG_8822.jpg" data-highres="images/highres/IMG_8822.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/locallyhated.jpg" data-highres="images/highres/locallyhated.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/apr25-Export pro-59.jpg" data-highres="images/highres/apr25-Export pro-59.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/amsterdam-6.jpg" data-highres="images/highres/amsterdam-6.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/apr25-28.jpg" data-highres="images/highres/apr25-28.jpg" alt="architecture" class="gallery-img" loading="lazy">
+                        </div>
+
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/untitled-1-2.jpg" data-highres="images/highres/untitled-1-2.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/winterdays-1.jpg" data-highres="images/highres/winterdays-1.jpg" alt="architecture" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/social_media_set1-28.jpg" data-highres="images/highres/social_media_set1-28.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/untitled-2.jpg" data-highres="images/highres/untitled-2.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/social_media_set1-27.jpg" data-highres="images/highres/social_media_set1-27.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/PSYC-35.jpg" data-highres="images/highres/PSYC-35.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                                        <img src="images/RENDERS/winterdays-50.jpg" data-highres="images/highres/winterdays-50.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>                       
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/apr25-32.jpg" data-highres="images/highres/apr25-32.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/WhatsApp Image 2025-04-09 at 21.44.44_b455f556.jpg" data-highres="images/highres/WhatsApp Image 2025-04-09 at 21.44.44_b455f556.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/apr25-Export pro-32.jpg" data-highres="images/highres/apr25-Export pro-32.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/untitled-3.jpg" data-highres="images/highres/untitled-3.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <div class="column">
+                            <img src="images/RENDERS/DSC04616-Enhanced-NR.jpg" data-highres="images/highres/MajTheo.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <div class="column">
+                            <img src="images/RENDERS/DSC04820-Enhanced-NR.jpg" data-highres="images/highres/MajTheo-2.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <div class="column">
+                            <img src="images/RENDERS/RCWHO-49.jpg" data-highres="images/highres/RCWHO-49.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/PSYC-46.jpg" data-highres="images/highres/PSYC-46.jpg" alt="architecture" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/amsterdam-10.jpg" data-highres="images/highres/amsterdam-10.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/amsterdam-122.jpg" data-highres="images/highres/amsterdam-122.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/PSYC-71.jpg" data-highres="images/highres/PSYC-71.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/Y11+12-10.jpg" data-highres="images/highres/Y11+12-10.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/amsterdam-82.jpg" data-highres="images/highres/amsterdam-82.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/amsterdam.4-20.jpg" data-highres="images/highres/amsterdam.4-20.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/Y11+12-13.jpg" data-highres="images/highres/Y11+12-13.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/tiabw-30.jpg" data-highres="images/highres/tiabw-30.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/social_media_set1-60.jpg" data-highres="images/highres/social_media_set1-60.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/amsterdam-44.jpg" data-highres="images/highres/amsterdam-44.jpg" alt="architecture" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/Finals-59.jpg" data-highres="images/highres/Finals-59.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+
+
+                        <div class="column">
+                            <img src="images/RENDERS/amsterdam-51.jpg" data-highres="images/highres/amsterdam-51.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <!-- ADVERTISING -->
+                        <div class="column">
+                            <img src="images/RENDERS/c80-67.jpg" data-highres="images/highres/c80-67.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/c80-54.jpg" data-highres="images/highres/c80-54.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/c80-52.jpg" data-highres="images/highres/c80-52.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <div class="column">
+                            <img src="images/RENDERS/c80-59.jpg" data-highres="images/highres/c80-59.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/c80-63.jpg" data-highres="images/highres/c80-63.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/c80-19.jpg" data-highres="images/highres/c80-19.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <div class="column">
+                            <img src="images/RENDERS/tiabw-22.jpg" data-highres="images/highres/tiabw-22.jpg" alt="portrait" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/danp-45.jpg" data-highres="images/highres/danp-45.jpg" alt="portrait" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/RCWHO-120.jpg" data-highres="images/highres/RCWHO-120.jpg" alt="portrait" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/winterdays-14.jpg" data-highres="images/highres/winterdays-14.jpg" alt="nature" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/danp-37.jpg" data-highres="images/highres/danp-37.jpg" alt="portrait" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/tiabw.jpg" data-highres="images/highres/tiabw.jpg" alt="portrait" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/danp-35.jpg" data-highres="images/highres/danp-35.jpg" alt="portrait" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/tiabw-14.jpg" data-highres="images/highres/tiabw-14.jpg" alt="portrait" class="gallery-img" loading="lazy" loading="lazy">
+                        </div>
+
+                        <!-- PLACES -->
+                        <div class="column">
+                            <img src="images/RENDERS/c80-30.jpg" data-highres="images/highres/c80-30.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/c80-41.jpg" data-highres="images/highres/c80-41.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/c80-49.jpg" data-highres="images/highres/c80-49.jpg" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <div class="column">
+                            <img src="images/RENDERS/c80-45.jpg" data-highres="images/highres/c80-45.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <div class="column">
+                            <img src="images/RENDERS/c80-23.jpg" data-highres="images/highres/c80-23.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+
+                        <div class="column">
+                            <img src="images/RENDERS/station1-45.jpg" data-highres="images/highres/station1-45.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/ghita1-64.jpg" data-highres="images/highres/ghita1-64.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/ghita1-8.jpg" data-highres="images/highres/ghita1-8.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/ghita1-24.jpg" data-highres="images/highres/ghita1-24.jpg" alt="architecture" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/station1-131.jpg" data-highres="images/highres/station1-131.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/ghita1-55.jpg" data-highres="images/highres/ghita1-55.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/station1-21.jpg" data-highres="images/highres/station1-21.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/station1-48.jpg" data-highres="images/highres/station1-48.jpg" alt="portrait" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/ghita1-30.jpg" data-highres="images/highres/ghita1-30.jpg" alt="architecture" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/station1-118.jpg" data-highres="images/highres/station1-118.jpg" alt="event" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/spoct25-38.jpg" data-highres="images/highres/spoct25-38.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/spoct25-34.jpg" data-highres="images/highres/spoct25-34.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/spoct25-24.jpg" data-highres="images/highres/spoct25-24.jpg" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/spoct25-23.jpg" data-highres="images/highres/spoct25-23" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/spoct25-18.jpg" data-highres="images/highres/spoct25-18" alt="advertising" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/spoct25-12.jpg" data-highres="images/highres/spoct25-12" alt="places" class="gallery-img" loading="lazy">
+                        </div>
+                        <div class="column">
+                            <img src="images/RENDERS/spoct25-5.jpg" data-highres="images/highres/spoct25-5.jpg" alt="nature" class="gallery-img" loading="lazy">
+                        </div>
+                        <!--<div class="column">
+                            <img src="images/RENDERS/" data-highres="images/highres/" alt="" class="gallery-img" loading="lazy">
+                        </div>-->
+                    </div>
+                    <!-- GRID CONTAINER -->
+                </div>
+                <!-- IMAGES CONTAINER -->
+                <div class="copyright"> All Images © &nbsp;<span id="year"></span>
+                </div>
+            </div>
+            <!-- GALLERY CONTENT -->
+        </div>
+        <!-------------------- GALLERY PAGE ------------------->
+        <!-------------------- CONTACT PAGE -------------------->
+        <div id="contact">
+            <!-- CONTACT CONTENT -->
+            <div id="contact-content">
+                <!-- NAVIGATION BAR -->
+                <div class="navigation-bar">
+                    <!-- LOGO -->
+                    <div class="logo">
+                        <a href="#home" class="page-link hover"> Marc Paraschiv </a>
+                    </div>
+                    <!-- LOGO -->
+                    <!-- MENUBAR -->
+                    <div class="menu-bar hover">
+                        <div class="menu-bar-text">
+                            <a href="#">Menu</a>
+                        </div>
+                        <div class="menu-bar-line-container">
+                            <span class="menu-bar-line"></span>
+                            <span class="menu-bar-line"></span>
+                        </div>
+                    </div>
+                    <!-- MENUBAR -->
+                </div>
+                <!-- NAVIGATION BAR -->
+                <div class="contact-heading"> CONTACT ME </div>
+                <!-- CONTACT FLEX -->
+                <div class="contact-flex">
+                    <!-- CONTACT FORM CONTAINER -->
+                    <div class="contact-form-container">
+                        <form action="mail.php">
+                            <!-- CONTACT FORM HEADING -->
+                            <div class="contact-form-heading"> Let's Get in Touch! </div>
+                            <!-- CONTACT FORM HEADING -->
+                            <input type="text" id="name" placeholder="Name" class="hover" required>
+                            <input type="email" id="email" placeholder="Email" class="hover" required>
+                            <input type="text" id="subject" placeholder="Reason for Contact" class="hover" required>
+                            <textarea name="textarea" id="body" placeholder="Message" class="hover" required></textarea>
+                            <button type="button" id="submit" class="hover" onclick="sendMail()">Send</button>
+                            <div id="message">INVALID EMAIL</div>
+                        </form>
+                    </div>
+                    <!-- CONTACT FORM CONTAINER -->
+                    <div class="contact-info">
+                        <div class="contact-info-content">
+                            <span class="highlight">Contacts<br></span> +40 771 281 442<br>
+                            <u><a href="mailto:marc@marcparaschiv.com" class="hover">marc@marcparaschiv.com</a></u>
+                        </div>
+                        <div class="contact-info-content">
+                            <span class="highlight">Social<br></span>
+                            <ul>
+                                <li>
+                                    <u><a href="https://www.instagram.com/marcnotheree/" class="hover">Instagram /</a>
+                                    </u>
+                                </li>
+                                <li>
+                                    <u>
+                                        <a href="https://www.tiktok.com/@marcnotheree" class="hover">Tiktok /</a>
+                                    </u>
+                                </li>
+                                <li>
+                                    <u>
+                                        <a href="https://www.linkedin.com/in/marc-paraschiv-155604213/" class="hover">Linkedin</a>
+                                    </u>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- CONTACT FLEX -->
+            </div>
+            <!-- CONTACT CONTENT -->
+        </div>
+        <!-------------------- CONTACT PAGE -------------------->
+        <!-- Popup Modal -->
+        <div id="popup-modal" class="popup-modal">
+            <span class="popup-close"></span>
+            <div id="popup-loader" class="popup-loader"></div>
+            <!-- Loader -->
+            <img class="popup-content" id="popup-image" alt="Popup Image" >
+            <div id="popup-caption"></div>
+            <div class="zoom-controls">
+                <button id="zoom-out" class="zoom-btn">−</button>
+                <button id="zoom-reset" class="zoom-btn">100%</button>
+                <button id="zoom-in" class="zoom-btn">+</button>
+            </div>
+        </div>
+    </main>
+    <!-- ALL CONTENTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js" integrity="sha256-4sETKhh3aSyi6NRiA+qunPaTawqSMDQca/xLWu27Hg4=" crossorigin="anonymous"></script>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/masonry.min.js" defer></script>
+    <script src="js/jquery.lettering.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <!--<script>
+        fetch('images/uploads/photos.json')
+            .then(res => res.json())
+            .then(photos => {
+                const gallery = document.getElementById('dynamic-gallery');
+                if (!gallery) return;
+                photos.reverse().forEach(photo => {
+                    const div = document.createElement('div');
+                    div.className = 'column';
+                    div.innerHTML = `
+        <img src="images/uploads/${photo.filename}" alt="${photo.title}" class="gallery-img" loading="lazy">
+      `;
+                    gallery.appendChild(div);
+                });
+            });
+    </script>-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryGrid = document.querySelector('.gallery-grid');
+            if (!galleryGrid) return;
+            const columns = Array.from(galleryGrid.children);
+            // Shuffle columns array
+            for (let i = columns.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [columns[i], columns[j]] = [columns[j], columns[i]];
+            }
+            // Remove all columns and re-append in shuffled order
+            columns.forEach(col => galleryGrid.appendChild(col));
+        });
+    </script>
+</body>
+
+</html>

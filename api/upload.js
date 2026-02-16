@@ -1,7 +1,20 @@
 const { put } = require("@vercel/blob");
 
+function parseBasicAuth(header) {
+  if (!header || !header.startsWith("Basic ")) return null;
+  try {
+    const decoded = Buffer.from(header.slice(6), "base64").toString("utf8");
+    const idx = decoded.indexOf(":");
+    if (idx === -1) return null;
+    return { user: decoded.slice(0, idx), pass: decoded.slice(idx + 1) };
+  } catch {
+    return null;
+  }
+}
+
 function unauthorized(res) {
   res.statusCode = 401;
+  res.setHeader("WWW-Authenticate", 'Basic realm="admin"');
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify({ error: "unauthorized" }));
 }
@@ -24,12 +37,17 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const auth = req.headers["authorization"] || "";
-  const expected = process.env.ADMIN_PASSWORD || "";
-  if (!expected || !auth.startsWith("Bearer ") || auth.slice(7) !== expected) {
-    unauthorized(res);
-    return;
+  const authHeader = req.headers["authorization"] || "";
+  let ok = false;
+  const expectedUser = process.env.ADMIN_USERNAME || "";
+  const expectedPass = process.env.ADMIN_PASSWORD || "";
+  const basic = parseBasicAuth(authHeader);
+  if (basic && basic.user === expectedUser && basic.pass === expectedPass) ok = true;
+  if (!ok && authHeader.startsWith("Bearer ")) {
+    const token = authHeader.slice(7);
+    if (token && token === expectedPass) ok = true;
   }
+  if (!ok) return unauthorized(res);
 
   const url = new URL(req.url, "http://localhost");
   const filename = url.searchParams.get("filename");

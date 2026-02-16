@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
       let alt = "portfolio";
       const m = b.pathname.match(/__alt-([^_]+)__/);
       if (m && m[1]) alt = m[1];
-      return { url: b.url, alt };
+      return { url: b.url, alt, pathname: b.pathname };
     }).reverse();
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");

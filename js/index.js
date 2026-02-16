@@ -567,6 +567,21 @@ function initializeGallery() {
     isAnimated: true
   });
 
+  function applyHideList(hidden) {
+    if (!Array.isArray(hidden) || hidden.length === 0) return;
+    const imgs = document.querySelectorAll('.gallery-img');
+    imgs.forEach(img => {
+      const src = img.getAttribute('src') || '';
+      const hide = hidden.some(h => src.endsWith(h) || src === h);
+      if (hide) {
+        const col = img.closest('.column');
+        if (col) col.style.display = 'none';
+      }
+    });
+    masonry.reloadItems();
+    masonry.layout();
+  }
+
   function loadDynamicGallery() {
     fetch('/api/list').then(r => r.ok ? r.json() : Promise.reject()).then(data => {
       if (!data || !Array.isArray(data.items)) return;
@@ -594,6 +609,11 @@ function initializeGallery() {
     }).catch(() => {
       setupPopupModal();
     });
+
+    fetch('/api/hide-list')
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(j => applyHideList(j.items || []))
+      .catch(() => {});
   }
 
   loadDynamicGallery();

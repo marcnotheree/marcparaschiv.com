@@ -57,7 +57,7 @@ async function uploadFiles() {
     return;
   }
 
-  const btn = qsa("#upload")[0];
+  const btn = qs("uploadBtn");
   btn.disabled = true;
   try {
     for (const file of input.files) {
@@ -202,5 +202,6 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     showLogin();
   }
-  qsa("#upload")[0].addEventListener("click", uploadFiles);
+  const ub = qs("uploadBtn");
+  if (ub) ub.addEventListener("click", uploadFiles);
 });

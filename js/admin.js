@@ -16,6 +16,15 @@ function authHeader() {
   return t ? { "Authorization": "Basic " + t } : {};
 }
 
+async function checkAuth() {
+  try {
+    const r = await apiFetch("/api/auth-check", { method: "POST" });
+    return r.ok;
+  } catch {
+    return false;
+  }
+}
+
 async function apiFetch(url, options={}) {
   const headers = Object.assign({}, options.headers || {}, authHeader());
   return fetch(url, Object.assign({}, options, { headers }));
@@ -173,7 +182,7 @@ async function renderLocalGrid() {
 
 function wireAuth() {
   const loginBtn = qs("loginBtn");
-  loginBtn.addEventListener("click", () => {
+  loginBtn.addEventListener("click", async () => {
     const u = qs("username").value.trim();
     const p = qs("password").value.trim();
     if (!u || !p) {
@@ -181,6 +190,12 @@ function wireAuth() {
       return;
     }
     setAuth(u, p);
+    const ok = await checkAuth();
+    if (!ok) {
+      clearAuth();
+      qs("loginStatus").textContent = "Invalid username or password";
+      return;
+    }
     qs("loginStatus").textContent = "Signed in";
     showApp();
     renderBlobGrid();
@@ -195,13 +210,15 @@ function wireAuth() {
 window.addEventListener("DOMContentLoaded", () => {
   wireTabs();
   wireAuth();
-  if (getAuth()) {
-    showApp();
-    renderBlobGrid();
-    renderLocalGrid();
-  } else {
-    showLogin();
-  }
+  (async () => {
+    if (getAuth() && await checkAuth()) {
+      showApp();
+      renderBlobGrid();
+      renderLocalGrid();
+    } else {
+      showLogin();
+    }
+  })();
   const ub = qs("uploadBtn");
   if (ub) ub.addEventListener("click", uploadFiles);
 });

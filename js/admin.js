@@ -116,8 +116,11 @@ async function renderBlobGrid() {
     del.textContent = "Delete";
     del.addEventListener("click", async () => {
       if (!confirm("Delete this image?")) return;
-      const r = await apiFetch(`/api/delete?pathname=${encodeURIComponent(it.pathname)}`, { method: "DELETE" });
-      if (r.ok) tile.remove();
+      const r = await apiFetch(`/api/delete?pathname=${encodeURIComponent(it.pathname)}&all=true`, { method: "DELETE" });
+      if (r.ok) {
+        tile.remove();
+        renderBlobGrid();
+      }
     });
     meta.appendChild(span);
     meta.appendChild(del);

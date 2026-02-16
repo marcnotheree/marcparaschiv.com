@@ -60,14 +60,16 @@ module.exports = async (req, res) => {
   }
 
   const base = sanitizeFilename(filename);
-  const now = new Date().toISOString().replace(/[:.]/g, "-");
-  const path = `portfolio/${now}__alt-${sanitizeFilename(alt)}__${base}`;
+  const safeAlt = sanitizeFilename(alt);
+  const path = `portfolio/${safeAlt}/${base}`;
 
   try {
     const blob = await put(path, req, {
       access: "public",
       contentType,
-      addRandomSuffix: true
+      addRandomSuffix: false,
+      // Overwrite same-name uploads to avoid duplicates
+      ifExists: "replace"
     });
 
     res.statusCode = 200;

@@ -1,4 +1,4 @@
-const { del } = require("@vercel/blob");
+const { del, list } = require("@vercel/blob");
 
 function parseBasicAuth(header) {
   if (!header || !header.startsWith("Basic ")) return null;
@@ -19,6 +19,26 @@ function unauthorized(res) {
   res.end(JSON.stringify({ error: "unauthorized" }));
 }
 
+function canonicalKey(pathname) {
+  try {
+    const segs = pathname.split("/");
+    const last = segs[segs.length - 1] || "";
+    let alt = "portfolio";
+    const m = last.match(/__alt-([^_]+)__/);
+    let base = last;
+    if (m && m[1]) {
+      alt = m[1];
+      base = last.substring(m[0].length);
+    } else if (segs.length >= 3) {
+      alt = segs[1];
+    }
+    base = base.replace(/-[a-f0-9]{6,}(?=\.[^.]+$)/i, "").toLowerCase();
+    return `${alt}/${base}`;
+  } catch {
+    return pathname.toLowerCase();
+  }
+}
+
 module.exports = async (req, res) => {
   if (req.method !== "DELETE") {
     res.statusCode = 405;
@@ -37,6 +57,7 @@ module.exports = async (req, res) => {
 
   const url = new URL(req.url, "http://localhost");
   const pathname = url.searchParams.get("pathname");
+  const all = url.searchParams.get("all") === "true";
   if (!pathname) {
     res.statusCode = 400;
     res.setHeader("Content-Type", "application/json");
@@ -45,10 +66,23 @@ module.exports = async (req, res) => {
   }
 
   try {
-    await del(pathname);
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ ok: true }));
+    if (!all) {
+      await del(pathname);
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ ok: true, count: 1 }));
+    } else {
+      const key = canonicalKey(pathname);
+      const l = await list({ prefix: "portfolio/" });
+      const blobs = Array.isArray(l.blobs) ? l.blobs : [];
+      const toDelete = blobs.filter(b => canonicalKey(b.pathname) === key).map(b => b.pathname);
+      for (const p of toDelete) {
+        await del(p);
+      }
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ ok: true, count: toDelete.length }));
+    }
   } catch (e) {
     res.statusCode = 500;
     res.setHeader("Content-Type", "application/json");

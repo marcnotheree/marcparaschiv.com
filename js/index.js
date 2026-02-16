@@ -389,7 +389,11 @@ $(function () {
         var imagestoshown = document.querySelectorAll(`[alt='${sortvalue}']`);
         imagestoshown.forEach((show) => (show.style.display = "block"));
       }
-      new Masonry(".gallery-grid", { itemSelector: ".column", isAnimated: true });
+      var m = window._masonryInstance;
+      if (m) {
+        m.reloadItems();
+        m.layout();
+      }
       sortingbuttons.forEach((b) => b.classList.remove("active"));
       button.classList.add("active");
     }),
@@ -548,6 +552,16 @@ function initializeGallery() {
 
   const masonry = window._masonryInstance || new Masonry('.gallery-grid', { itemSelector: '.column', isAnimated: true });
   window._masonryInstance = masonry;
+  try {
+    galleryGrid.style.opacity = '0';
+    galleryGrid.style.transition = 'opacity 180ms ease-out';
+  } catch {}
+
+  // Ensure all existing static images are lazy and async decoded
+  document.querySelectorAll('.gallery-img').forEach(img => {
+    if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+    if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+  });
 
   function applyHideList(hidden) {
     if (!Array.isArray(hidden) || hidden.length === 0) return;
@@ -598,11 +612,15 @@ function initializeGallery() {
         masonry.reloadItems();
         debouncedLayout();
         setupPopupModal();
+        // reveal grid after first layout tick
+        setTimeout(() => { galleryGrid.style.opacity = '1'; }, 50);
       } else {
         setupPopupModal();
+        setTimeout(() => { galleryGrid.style.opacity = '1'; }, 50);
       }
     }).catch(() => {
       setupPopupModal();
+      setTimeout(() => { galleryGrid.style.opacity = '1'; }, 50);
     });
 
     fetch('/api/hide-list')
